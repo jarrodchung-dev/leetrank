@@ -1,6 +1,10 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
 const Form = (props) => {
+  if (props.isAuthenticated) {
+    return <Redirect to="/" />;
+  }
   return (
     <div>
       {props.type === "Login" && <h1 className="title">Log In</h1>}
@@ -15,20 +19,20 @@ const Form = (props) => {
                 value={props.data.username}
                 className="input"
                 type="text"
-                onChange={props.handleFormChange}
+                onChange={props.handleChange}
               />
             </div>
           </div>
         )}
         <div className="field">
-          <label className="label">Emmail</label>
+          <label className="label">Email</label>
           <div className="control">
             <input
               name="email"
               value={props.data.email}
               className="input"
               type="email"
-              onChange={props.handleFormChange}
+              onChange={props.handleChange}
             />
           </div>
         </div>
@@ -40,7 +44,7 @@ const Form = (props) => {
               value={props.data.password}
               className="input"
               type="password"
-              onChange={props.handleFormChange}
+              onChange={props.handleChange}
             />
           </div>
         </div>

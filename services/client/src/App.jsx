@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar.jsx";
 import Users from "./components/Users.jsx";
 import AddUser from "./components/AddUser.jsx";
 import Form from "./components/Form.jsx";
+import Logout from "./components/Logout.jsx";
 import About from "./components/About.jsx";
 import Footer from "./components/Footer.jsx";
 
@@ -18,12 +19,14 @@ class App extends Component {
         username: "",
         email: "",
         password: ""
-      }
+      },
+      isAuthenticated: false
     };
     this.getUsers = this.getUsers.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.clearFormInputs = this.clearFormInputs.bind(this);
   }
   componentDidMount() {
     this.getUsers();
@@ -60,13 +63,38 @@ class App extends Component {
       username: this.state.username,
       password: this.state.password
     };
-    0;
   }
   handleFormSubmit(event) {
     event.preventDefault();
-    console.log("Sanity check!");
-    console.log("Event type");
-    this.setState({ data: { username: "", email: "", password: "" } });
+    const type = window.location.href.split("/").reverse()[0];
+    let data = {
+      email: this.state.data.email,
+      password: this.state.data.password
+    };
+    if (type === "register") {
+      data.username = this.state.data.username;
+    }
+    const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${type}`;
+    axios
+      .post(url, data)
+      .then((res) => {
+        this.clearFormInputs();
+        window.localStorage.setItem("authToken", res.data.auth_token);
+        this.setState({ isAuthenticated: true });
+        this.getUsers();
+      })
+      .catch((err) => console.log(err));
+  }
+  clearFormInputs() {
+    this.setState({
+      data: { username: "", email: "", password: "" },
+      username: "",
+      email: ""
+    });
+  }
+  logoutUser() {
+    window.localStorage.clear();
+    this.setState({ isAuthenticated: false });
   }
   render() {
     return (
@@ -99,19 +127,31 @@ class App extends Component {
                         type={"Register"}
                         data={this.state.data}
                         handleChange={this.handleChange}
-                        handleSubmit={this.handleFormSubmi}
+                        handleFormSubmit={this.handleFormSubmit}
+                        isAuthenticated={this.state.isAuthenticated}
                       />
                     )}
                   />
                   <Route
                     exact
-                    path="login"
+                    path="/login"
                     render={() => (
                       <Form
                         type={"Login"}
                         data={this.state.data}
                         handleChange={this.handleChange}
-                        handleSubmit={this.handleFormSubmit}
+                        handleFormSubmit={this.handleFormSubmit}
+                        isAuthenticated={this.state.isAuthenticated}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/logout"
+                    render={() => (
+                      <Logout
+                        logoutUser={this.logoutUser}
+                        isAuthenticated={this.state.isAuthenticated}
                       />
                     )}
                   />

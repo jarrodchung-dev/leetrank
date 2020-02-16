@@ -29,13 +29,13 @@ const NavBar = (props) => {
   };
   return (
     <header>
-      <nav className="navbar is-light">
+      <nav className="navbar is-light is-fixed-top">
         <section className="container">
           <div className="navbar-brand">
             <strong className="navbar-item" id="brand">
               {props.title}
             </strong>
-            <span className="nav-toggle navbar-burger" onClick={toggleNavBar}>
+            <span className="nav-toggle navbar-burger" ref={node} onClick={toggleNavBar}>
               <span></span>
               <span></span>
               <span></span>

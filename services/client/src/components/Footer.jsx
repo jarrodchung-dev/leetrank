@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = (props) => {
   return (
-    <footer className="footer is-light">
+    <footer className="footer is-light is-fixed-bottom">
       <div className="container">
         <div className="columns is-multiline">
           <div className="column is-4">
