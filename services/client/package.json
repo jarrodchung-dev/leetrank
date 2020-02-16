@@ -4,7 +4,7 @@
   "description": "Client service for LeetRank",
   "main": "src/index.jsx",
   "scripts": {
-    "test": "react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -15,12 +15,9 @@
   },
   "author": "jarrodchung-dev",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jarrodchung-dev/leetrank/issues"
-  },
-  "homepage": "https://github.com/jarrodchung-dev/leetrank#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "dot-env": "0.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-ace": "^8.0.0",
@@ -29,7 +26,24 @@
     "react-scripts": "^3.4.0"
   },
   "devDependencies": {
+    "bulma": "^0.8.0",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2"
+    "enzyme-adapter-react-16": "^1.15.2",
+    "node-sass": "^4.13.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "^1.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

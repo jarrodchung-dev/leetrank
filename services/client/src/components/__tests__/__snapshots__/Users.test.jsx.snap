@@ -1,43 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Users /> renders a snapshot successfully 1`] = `
-<div
-  className="container"
->
+Array [
   <div
-    className="columns"
-    id="users"
+    className="level"
   >
     <div
-      className="level"
+      className="level-left"
     >
       <div
-        className="level-left"
+        className="level-item"
       >
-        <div
-          className="level-item"
-        >
-          <p>
-            testuser
-          </p>
-        </div>
+        <p>
+          testuser
+        </p>
       </div>
     </div>
+  </div>,
+  <div
+    className="level"
+  >
     <div
-      className="level"
+      className="level-left"
     >
       <div
-        className="level-left"
+        className="level-item"
       >
-        <div
-          className="level-item"
-        >
-          <p>
-            testuser2
-          </p>
-        </div>
+        <p>
+          testuser2
+        </p>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
