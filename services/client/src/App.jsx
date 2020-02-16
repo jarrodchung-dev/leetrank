@@ -4,6 +4,7 @@ import axios from "axios";
 import NavBar from "./components/NavBar.jsx";
 import Users from "./components/Users.jsx";
 import AddUser from "./components/AddUser.jsx";
+import Form from "./components/Form.jsx";
 import About from "./components/About.jsx";
 import Footer from "./components/Footer.jsx";
 
@@ -13,12 +14,16 @@ class App extends Component {
     this.state = {
       title: "LeetRank",
       users: [],
-      username: "",
-      email: ""
+      data: {
+        username: "",
+        email: "",
+        password: ""
+      }
     };
     this.getUsers = this.getUsers.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
   componentDidMount() {
     this.getUsers();
@@ -32,20 +37,36 @@ class App extends Component {
       .catch((err) => console.log(err));
   }
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    const data = this.state.data;
+    data[event.target.name] = event.target.value;
+    this.setState({ data });
   }
   handleSubmit(event) {
     event.preventDefault();
-    const { username, email } = this.state;
-    const data = { username, email };
+    const type = window.location.href.split("/").reverse()[0];
+    let data = { email: this.state.data.email, password: this.state.data.password };
+    if (type === "register") {
+      data.username = this.state.data.username;
+    }
+    const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${type}`;
     axios
-      .post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
-      .then((res) => {
-        this.setState({ username: "", email: "" }, () => {
-          this.getUsers();
-        });
-      })
+      .post(url, data)
+      .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
+  }
+  handleFormChange(event) {
+    let data = {
+      email: this.state.email,
+      username: this.state.username,
+      password: this.state.password
+    };
+    0;
+  }
+  handleFormSubmit(event) {
+    event.preventDefault();
+    console.log("Sanity check!");
+    console.log("Event type");
+    this.setState({ data: { username: "", email: "", password: "" } });
   }
   render() {
     return (
@@ -60,24 +81,44 @@ class App extends Component {
                   <Route
                     exact
                     path="/"
-                    render={() => {
-                      return (
-                        <>
-                          <h1 className="title is-1 has-text-centered">All Users</h1>
-                          <hr />
-                          <br />
-                          <AddUser
-                            username={this.state.username}
-                            email={this.state.email}
-                            handleSubmit={this.handleSubmit}
-                            handleChange={this.handleChange}
-                          />
-                          <br />
-                          <br />
-                          <Users users={this.state.users} />
-                        </>
-                      );
-                    }}
+                    render={() => (
+                      <AddUser
+                        title={"Add User"}
+                        username={this.state.username}
+                        email={this.state.email}
+                        handleChange={this.handleChange}
+                        handleSubmit={this.handleFormSubmit}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/register"
+                    render={() => (
+                      <Form
+                        type={"Register"}
+                        data={this.state.data}
+                        handleChange={this.handleChange}
+                        handleSubmit={this.handleFormSubmi}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="login"
+                    render={() => (
+                      <Form
+                        type={"Login"}
+                        data={this.state.data}
+                        handleChange={this.handleChange}
+                        handleSubmit={this.handleFormSubmit}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/users"
+                    render={() => <Users users={this.state.users} />}
                   />
                   <Route exact path="/about" component={About} />
                 </Switch>

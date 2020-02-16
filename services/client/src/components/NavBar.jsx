@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Route, Link } from "react-router-dom";
 
 const NavBar = (props) => {
@@ -32,7 +32,7 @@ const NavBar = (props) => {
       <nav className="navbar is-light">
         <section className="container">
           <div className="navbar-brand">
-            <strong className="navbar-item" id="brand" ref={node}>
+            <strong className="navbar-item" id="brand">
               {props.title}
             </strong>
             <span className="nav-toggle navbar-burger" onClick={toggleNavBar}>
@@ -41,7 +41,7 @@ const NavBar = (props) => {
               <span></span>
             </span>
           </div>
-          <div className="navbar-menu">
+          <div className="navbar-menu" ref={node}>
             <div className="navbar-start">
               <Link to="/" className="navbar-item">
                 Home
@@ -49,8 +49,8 @@ const NavBar = (props) => {
               <Link to="/about" className="navbar-item">
                 About
               </Link>
-              <Link to="/status" className="navbar-item">
-                User Status
+              <Link to="/users" className="navbar-item">
+                Users
               </Link>
             </div>
             <div className="navbar-end">

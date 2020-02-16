@@ -1,54 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AddUser /> should render a snapshot successfully 1`] = `
-<form
-  className="form"
->
-  <div
-    className="field"
+Array [
+  <h1
+    className="title"
+  />,
+  <hr />,
+  <form
+    className="form"
   >
-    <label
-      className="label"
-    >
-      Username
-    </label>
     <div
-      className="control"
+      className="field"
     >
-      <input
-        className="input"
-        name="username"
-        placeholder="i.e. johnsmith"
-        required={true}
-        type="text"
-      />
+      <label
+        className="label"
+      >
+        Username
+      </label>
+      <div
+        className="control"
+      >
+        <input
+          className="input"
+          name="username"
+          placeholder="i.e. johnsmith"
+          required={true}
+          type="text"
+        />
+      </div>
     </div>
-  </div>
-  <div
-    className="field"
-  >
-    <label
-      className="label"
-    >
-      Email
-    </label>
     <div
-      className="control"
+      className="field"
     >
-      <input
-        className="input"
-        name="email"
-        placeholder="i.e. johnsmith@example.com"
-        required={true}
-        type="email"
-      />
+      <label
+        className="label"
+      >
+        Email
+      </label>
+      <div
+        className="control"
+      >
+        <input
+          className="input"
+          name="email"
+          placeholder="i.e. johnsmith@example.com"
+          required={true}
+          type="email"
+        />
+      </div>
     </div>
-  </div>
-  <button
-    className="button"
-    type="button"
-  >
-    Submit
-  </button>
-</form>
+    <button
+      className="button"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>,
+]
 `;
