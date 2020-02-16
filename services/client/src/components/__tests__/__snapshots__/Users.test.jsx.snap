@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Users /> renders a snapshot successfully 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="columns"
+    id="users"
+  >
+    <div
+      className="level"
+    >
+      <div
+        className="level-left"
+      >
+        <div
+          className="level-item"
+        >
+          <p>
+            testuser
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="level"
+    >
+      <div
+        className="level-left"
+      >
+        <div
+          className="level-item"
+        >
+          <p>
+            testuser2
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,21 +1,7 @@
 version: "3.7"
 
 services:
-  client:
-    container_name: client
-    build:
-      context: ./services/client
-      dockerfile: Dockerfile-prod
-      args:
-        - NODE_ENV=production
-        - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
-    ports:
-      - "3007:80"
-    depends_on:
-      - users
-
   users:
-    container_name: users
     build:
       context: ./services/users
       dockerfile: Dockerfile-prod
@@ -24,8 +10,8 @@ services:
     environment:
       - FLASK_ENV=production
       - APP_SETTINGS=project.config.ProductionConfig
-      - DATABASE_URL=postgres://postgres:postgres@users-db/users_prod
-      - DATABASE_TEST_URL=postgres://postgres:postgres@users-db/users_test
+      - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_prod
+      - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
       - SECRET_KEY=${SECRET_KEY}
     depends_on:
       - users-db
@@ -34,15 +20,67 @@ services:
     build:
       context: ./services/users/project/db
       dockerfile: Dockerfile
-    ports:
-      - 5435:5432
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  client:
+    container_name: client
+    build:
+      context: ./services/client
+      dockerfile: Dockerfile-prod
+      args:
+        - NODE_ENV=production
+        - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+        - REACT_APP_API_GATEWAY_URL=${REACT_APP_API_GATEWAY_URL}
+        - REACT_APP_EXERCISES_SERVICE_URL=${REACT_APP_EXERCISES_SERVICE_URL}
+    expose:
+      - 80
+    depends_on:
+      - users
+
+  swagger:
+    build:
+      context: ./services/swagger
+      dockerfile: Dockerfile-prod
+    expose:
+      - 8080
+    environment:
+      - URL=swagger.json
+    depends_on:
+      - users
+
+  exercises:
+    build:
+      context: ./services/exercises
+      dockerfile: Dockerfile-prod
+    expose:
+      - 5000
+    environment:
+      - FLASK_ENV=production
+      - APP_SETTINGS=project.config.StagingConfig
+      - DATABASE_URL=postgres://postgres:postgres@exercises-db:5432/exercises_prod
+      - DATABASE_TEST_URL=postgres://postgres:postgres@exercises-db:5432/exercises_test
+    depends_on:
+      - users
+      - exercises-db
+
+  exercises-db:
+    build:
+      context: ./services/exercises/project/db
+      dockerfile: Dockerfile
+    expose:
+      - 5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
   nginx:
-    container_name: nginx
-    build: ./services/nginx
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile-prod
     restart: always
     ports:
       - 80:80
