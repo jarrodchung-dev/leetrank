@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exercises renders a snaphost properly 1`] = `
+<div>
+  <h1
+    className="title is-1"
+  >
+    Exercises
+  </h1>
+  <hr />
+  <div
+    className="notification is-warning"
+  >
+    <span>
+      Please log in to submit an exercise.
+    </span>
+  </div>
+  <div
+    className="field is-grouped"
+  >
+       
+  </div>
+</div>
+`;

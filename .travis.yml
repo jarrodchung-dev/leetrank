@@ -1,0 +1,16 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.25.4
+
+before_install:
+  - docker-compose up -d --build
+
+script:
+  - docker-compose exec users python manage.py test
+
+after_script:
+  - docker-compose down

@@ -1,0 +1,6 @@
+__pycache__
+htmlcov
+env
+.tern-project
+node_modules
+.DS_Store

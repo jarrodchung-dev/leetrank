@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar NavBar renders a snapshot properly 1`] = `
+<header>
+  <nav
+    aria-label="main navigation"
+    className="navbar is-mobile is-light"
+    role="navigation"
+  >
+    <div
+      className="navbar-brand"
+    >
+      <button
+        className="button is-light"
+      >
+        <div
+          className="navbar-item"
+        >
+          <strong>
+            <a
+              href="/"
+              onClick={[Function]}
+            >
+              Hello, World!
+            </a>
+          </strong>
+        </div>
+      </button>
+    </div>
+  </nav>
+</header>
+`;
