@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
 import Users from "./components/Users.jsx";
 import AddUser from "./components/AddUser.jsx";
+import About from "./components/About.jsx";
 import axios from "axios";
 
 class App extends Component {
@@ -20,7 +22,7 @@ class App extends Component {
   }
   getUsers() {
     axios
-      .get(`${process.env.REACT_APP_USERS_SERVICE_URL}:5001/users`)
+      .get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
       .then((res) => {
         this.setState({ users: res.data.data.users });
       })
@@ -34,7 +36,7 @@ class App extends Component {
     const { username, email } = this.state;
     const data = { username, email };
     axios
-      .post(`${process.env.REACT_APP_USERS_SERVICE_URL}:5001/users`, data)
+      .post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
       .then((res) => {
         this.setState({ username: "", email: "" }, () => {
           this.getUsers();
@@ -44,19 +46,36 @@ class App extends Component {
   }
   render() {
     return (
-      <section>
+      <section className="section">
         <div className="container is-fluid">
           <div className="columns">
             <div className="column is-2"></div>
             <div className="column is-8">
-              <h1 className="title is-1 has-text-centered">All Users</h1>
-              <br />
-              <Users users={this.state.users} />
-              <br />
-              <AddUser
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-              />
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={() => {
+                    return (
+                      <>
+                        <h1 className="title is-1 has-text-centered">All Users</h1>
+                        <hr />
+                        <br />
+                        <AddUser
+                          username={this.state.username}
+                          email={this.state.email}
+                          handleSubmit={this.handleSubmit}
+                          handleChange={this.handleChange}
+                        />
+                        <br />
+                        <br />
+                        <Users users={this.state.users} />
+                      </>
+                    );
+                  }}
+                />
+                <Route exact path="/about" component={About} />
+              </Switch>
             </div>
             <div className="column is-2"></div>
           </div>

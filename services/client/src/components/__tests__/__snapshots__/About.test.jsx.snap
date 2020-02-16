@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<About /> renders a snapshot successfully 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="columns"
+  >
+    <div
+      className="column"
+    >
+      <h3
+        className="title is-3"
+      >
+        About
+      </h3>
+      <hr />
+      <br />
+      <p>
+        Add something relevant here.
+      </p>
+    </div>
+  </div>
+</div>
+`;
