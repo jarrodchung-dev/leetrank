@@ -34,10 +34,8 @@ services:
       args:
         - NODE_ENV=production
         - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
-        - REACT_APP_API_GATEWAY_URL=${REACT_APP_API_GATEWAY_URL}
-        - REACT_APP_EXERCISES_SERVICE_URL=${REACT_APP_EXERCISES_SERVICE_URL}
-    expose:
-      - 80
+    ports:
+      - "3007:80"
     depends_on:
       - users
 
@@ -78,9 +76,8 @@ services:
       - POSTGRES_PASSWORD=postgres
 
   nginx:
-    build:
-      context: ./services/nginx
-      dockerfile: Dockerfile-prod
+    container_name: nginx
+    build: ./services/nginx
     restart: always
     ports:
       - 80:80

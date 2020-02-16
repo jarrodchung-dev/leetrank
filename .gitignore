@@ -4,3 +4,5 @@ env
 .tern-project
 node_modules
 .DS_Store
+curl.sh
+dm-env-prod.sh

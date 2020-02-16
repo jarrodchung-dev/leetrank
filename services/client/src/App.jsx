@@ -20,7 +20,7 @@ class App extends Component {
   }
   getUsers() {
     axios
-      .get("http://localhost:5001/users")
+      .get(`${process.env.REACT_APP_USERS_SERVICE_URL}:5001/users`)
       .then((res) => {
         this.setState({ users: res.data.data.users });
       })
@@ -34,7 +34,7 @@ class App extends Component {
     const { username, email } = this.state;
     const data = { username, email };
     axios
-      .post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
+      .post(`${process.env.REACT_APP_USERS_SERVICE_URL}:5001/users`, data)
       .then((res) => {
         this.setState({ username: "", email: "" }, () => {
           this.getUsers();
