@@ -31,7 +31,9 @@ const AddUser = (props) => {
           />
         </div>
       </div>
-      <button className="button">Submit</button>
+      <button className="button" type="button">
+        Submit
+      </button>
     </form>
   );
 };

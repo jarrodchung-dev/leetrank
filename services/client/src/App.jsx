@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import axios from "axios";
+import NavBar from "./components/NavBar.jsx";
 import Users from "./components/Users.jsx";
 import AddUser from "./components/AddUser.jsx";
 import About from "./components/About.jsx";
-import axios from "axios";
+import Footer from "./components/Footer.jsx";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: "LeetRank",
       users: [],
       username: "",
       email: ""
@@ -46,41 +49,45 @@ class App extends Component {
   }
   render() {
     return (
-      <section className="section">
-        <div className="container is-fluid">
-          <div className="columns">
-            <div className="column is-2"></div>
-            <div className="column is-8">
-              <Switch>
-                <Route
-                  exact
-                  path="/"
-                  render={() => {
-                    return (
-                      <>
-                        <h1 className="title is-1 has-text-centered">All Users</h1>
-                        <hr />
-                        <br />
-                        <AddUser
-                          username={this.state.username}
-                          email={this.state.email}
-                          handleSubmit={this.handleSubmit}
-                          handleChange={this.handleChange}
-                        />
-                        <br />
-                        <br />
-                        <Users users={this.state.users} />
-                      </>
-                    );
-                  }}
-                />
-                <Route exact path="/about" component={About} />
-              </Switch>
+      <>
+        <NavBar title={this.state.title} />
+        <section className="section">
+          <div className="container is-fluid">
+            <div className="columns">
+              <div className="column is-2"></div>
+              <div className="column is-8">
+                <Switch>
+                  <Route
+                    exact
+                    path="/"
+                    render={() => {
+                      return (
+                        <>
+                          <h1 className="title is-1 has-text-centered">All Users</h1>
+                          <hr />
+                          <br />
+                          <AddUser
+                            username={this.state.username}
+                            email={this.state.email}
+                            handleSubmit={this.handleSubmit}
+                            handleChange={this.handleChange}
+                          />
+                          <br />
+                          <br />
+                          <Users users={this.state.users} />
+                        </>
+                      );
+                    }}
+                  />
+                  <Route exact path="/about" component={About} />
+                </Switch>
+              </div>
+              <div className="column is-2"></div>
             </div>
-            <div className="column is-2"></div>
           </div>
-        </div>
-      </section>
+        </section>
+        <Footer />
+      </>
     );
   }
 }

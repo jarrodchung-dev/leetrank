@@ -1,11 +1,21 @@
 import React from "react";
 
-const About = (props) => {
+const Footer = (props) => {
   return (
-    <div className="container">
-      <div className="columns"></div>
-    </div>
+    <footer className="footer is-light">
+      <div className="container">
+        <div className="columns is-multiline">
+          <div className="column is-4">
+            <span>Copyright © 2020 Jarrod Chung</span>
+          </div>
+          <div className="column is-4">
+            <div className="row"></div>
+          </div>
+          <div className="column is-4"></div>
+        </div>
+      </div>
+    </footer>
   );
 };
 
-export default About;
+export default Footer;

@@ -1,0 +1,50 @@
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: FiraMono-Regular;
+  letter-spacing: 0.0001em;
+  min-width: 320px;
+  direction: ltr;
+  text-align: left;
+  line-height: 1.45;
+  background-color: #fff;
+  color: #1d1d1f;
+  font-style: normal;
+}
+
+#brand {
+  font-size: 25px;
+}
+
+input[type="text"],
+input[type="email"] {
+  font-family: FiraMono-Regular;
+  letter-spacing: 0.0001em;
+  box-sizing: border-box;
+  border-radius: 0;
+  padding: 1.5em;
+  margin: auto;
+}
+
+button[type="button"] {
+  font-family: FiraMono-Regular;
+  letter-spacing: 0.0001em;
+  box-sizing: border-box;
+  border-radius: 0;
+  background-color: black;
+  color: white;
+}
+
+button[type="button"]:hover,
+button[type="button"]:focus {
+  background-color: white;
+  color: black;
+  border: solid;
+  border-color: black;
+}
+
+footer .footer {
+  display: block;
+}

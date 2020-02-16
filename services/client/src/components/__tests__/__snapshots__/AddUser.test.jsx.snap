@@ -46,6 +46,7 @@ exports[`<AddUser /> should render a snapshot successfully 1`] = `
   </div>
   <button
     className="button"
+    type="button"
   >
     Submit
   </button>
