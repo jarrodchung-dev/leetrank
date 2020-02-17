@@ -25,11 +25,10 @@ docker-compose -f docker-compose-prod.yml exec users python manage.py recreate-d
 inspect $? e2e
 docker-compose -f docker-compose-prod.yml down
 
-if [ -n "${fails}" ] then
-    echo "Tests failed: ${fails}"
+if [ -n "${fails}" ]; then 
+    echo "Failed tests: ${fails}"
     exit 1
 else
     echo "All tests passed"
     exit 0
 fi
-
