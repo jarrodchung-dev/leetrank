@@ -18,4 +18,4 @@ before_script:
   - npm install
 
 script:
-  - bash run-test.sh
+  - bash run-tests.sh
