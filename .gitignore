@@ -7,3 +7,4 @@ node_modules
 curl.sh
 dm-env-prod.sh
 workflow.sh
+notes.md
