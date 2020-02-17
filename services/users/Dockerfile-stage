@@ -1,7 +1,6 @@
 FROM python:3.8.0-slim
 
 RUN apt-get update && \
-    apt-get -y install apt-utils && \
     apt-get -y install netcat && \
     apt-get clean
 
@@ -9,10 +8,9 @@ WORKDIR /usr/src/app
 
 COPY ./requirements.txt /usr/src/app/requirements.txt
 RUN pip install --upgrade pip
-RUN pip install psycopg2-binary
 RUN pip install -r requirements.txt
 
-COPY ./entrypoint-stage.sh /usr/src/app/entrypoint-stage.sh
+COPY ./entrypoint-prod.sh /usr/src/app/entrypoint-stage.sh
 RUN chmod +x /usr/src/app/entrypoint-stage.sh
 
 COPY . /usr/src/app

@@ -5,6 +5,17 @@ services:
 
 env:
   DOCKER_COMPOSE_VERSION: 1.25.4
+  COMMIT: ${TRAVIS_COMMIT::8}
+  MAIN_REPO: https://github.com/jarrodchung-dev/leetrank.git
+  USERS: leetrank-users
+  USERS_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/users
+  USERS_DB: leetrank-users_db
+  USERS_DB_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/users/project/db
+  CLIENT: leetrank-client
+  CLIENT_REPO: ${MAIN_REPO}#{TRAVIS_BRANCH}:/services/client
+  SWAGGER: leetrank-swagger
+  SWAGGER_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/swagger
+  SECRET_KEY: 3cfaec6e8b66603e474fdf40c690dcc34a02c24b211893d5
 
 before_install:
   - sudo apt-get update
@@ -19,3 +30,7 @@ before_script:
 
 script:
   - bash run-tests.sh
+
+after_success:
+  - chmod +x ./docker-push.sh
+  - bash ./docker-push.sh
