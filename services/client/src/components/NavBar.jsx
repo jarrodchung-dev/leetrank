@@ -52,17 +52,28 @@ const NavBar = (props) => {
               <Link to="/users" className="navbar-item">
                 Users
               </Link>
+              {props.isAuthenticated && (
+                <Link to="/user-status" className="navbar-item">
+                  User Status
+                </Link>
+              )}
             </div>
             <div className="navbar-end">
-              <Link to="/register" className="navbar-item">
-                Register
-              </Link>
-              <Link to="/login" className="navbar-item">
-                Log In
-              </Link>
-              <Link to="/logout" className="navbar-item">
-                Log Out
-              </Link>
+              {!props.isAuthenticated && (
+                <Link to="/register" className="navbar-item">
+                  Register
+                </Link>
+              )}
+              {!props.isAuthenticated && (
+                <Link to="/login" className="navbar-item">
+                  Log In
+                </Link>
+              )}
+              {props.isAuthenticated && (
+                <Link to="/logout" className="navbar-item">
+                  Log Out
+                </Link>
+              )}
             </div>
           </div>
         </section>

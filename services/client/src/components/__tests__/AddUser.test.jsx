@@ -14,7 +14,7 @@ describe("<AddUser />", () => {
     expect(element.find("button").text()).toBe("Submit");
   });
 
-  it("should render a snapshot successfully", () => {
+  it("renders a snapshot successfully", () => {
     const tree = renderer.create(<AddUser />).toJSON();
     expect(tree).toMatchSnapshot();
   });

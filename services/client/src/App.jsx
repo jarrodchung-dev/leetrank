@@ -7,6 +7,7 @@ import AddUser from "./components/AddUser.jsx";
 import Form from "./components/Form.jsx";
 import Logout from "./components/Logout.jsx";
 import About from "./components/About.jsx";
+import UserStatus from "./components/UserStatus.jsx";
 import Footer from "./components/Footer.jsx";
 
 class App extends Component {
@@ -25,8 +26,8 @@ class App extends Component {
     this.getUsers = this.getUsers.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.clearFormInputs = this.clearFormInputs.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
   }
   componentDidMount() {
     this.getUsers();
@@ -45,26 +46,6 @@ class App extends Component {
     this.setState({ data });
   }
   handleSubmit(event) {
-    event.preventDefault();
-    const type = window.location.href.split("/").reverse()[0];
-    let data = { email: this.state.data.email, password: this.state.data.password };
-    if (type === "register") {
-      data.username = this.state.data.username;
-    }
-    const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${type}`;
-    axios
-      .post(url, data)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
-  }
-  handleFormChange(event) {
-    let data = {
-      email: this.state.email,
-      username: this.state.username,
-      password: this.state.password
-    };
-  }
-  handleFormSubmit(event) {
     event.preventDefault();
     const type = window.location.href.split("/").reverse()[0];
     let data = {
@@ -99,7 +80,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <NavBar title={this.state.title} />
+        <NavBar title={this.state.title} isAuthenticated={this.state.isAuthenticated} />
         <section className="section">
           <div className="container is-fluid">
             <div className="columns">
@@ -115,7 +96,7 @@ class App extends Component {
                         username={this.state.username}
                         email={this.state.email}
                         handleChange={this.handleChange}
-                        handleSubmit={this.handleFormSubmit}
+                        handleSubmit={this.handleSubmit}
                       />
                     )}
                   />
@@ -127,7 +108,7 @@ class App extends Component {
                         type={"Register"}
                         data={this.state.data}
                         handleChange={this.handleChange}
-                        handleFormSubmit={this.handleFormSubmit}
+                        handleSubmit={this.handleSubmit}
                         isAuthenticated={this.state.isAuthenticated}
                       />
                     )}
@@ -140,7 +121,7 @@ class App extends Component {
                         type={"Login"}
                         data={this.state.data}
                         handleChange={this.handleChange}
-                        handleFormSubmit={this.handleFormSubmit}
+                        handleSubmit={this.handleSubmit}
                         isAuthenticated={this.state.isAuthenticated}
                       />
                     )}
@@ -159,6 +140,13 @@ class App extends Component {
                     exact
                     path="/users"
                     render={() => <Users users={this.state.users} />}
+                  />
+                  <Route
+                    exact
+                    path="/user-status"
+                    render={() => (
+                      <UserStatus isAuthenticated={this.state.isAuthenticated} />
+                    )}
                   />
                   <Route exact path="/about" component={About} />
                 </Switch>

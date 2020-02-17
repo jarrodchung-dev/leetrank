@@ -7,8 +7,10 @@ exports[`<Logout /> renders a snapshot correctly 1`] = `
   <p>
     You are now logged out.
   </p>
+  <br />
   <p>
     Click
+     
     <a
       className="link"
       href="/login"

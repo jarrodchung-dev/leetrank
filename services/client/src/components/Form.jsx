@@ -9,7 +9,7 @@ const Form = (props) => {
     <div>
       {props.type === "Login" && <h1 className="title">Log In</h1>}
       {props.type === "Register" && <h1 className="title">Register</h1>}
-      <form onSubmit={(event) => props.handleFormSubmit(event)}>
+      <form onSubmit={(event) => props.handleSubmit(event)}>
         {props.type === "Register" && (
           <div className="field">
             <label className="label">Username</label>

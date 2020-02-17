@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Users /> renders a snapshot successfully 1`] = `
+exports[`<UsersList /> renders a snapshot successfully 1`] = `
 Array [
   <div
     className="level"
@@ -14,7 +14,7 @@ Array [
         <p
           className="username"
         >
-          testuser
+          test_user
         </p>
       </div>
     </div>
@@ -31,7 +31,7 @@ Array [
         <p
           className="username"
         >
-          testuser2
+          test_user2
         </p>
       </div>
     </div>

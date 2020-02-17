@@ -9,8 +9,9 @@ class Logout extends Component {
     return (
       <div className="container is-fluid">
         <p>You are now logged out.</p>
+        <br />
         <p>
-          Click
+          Click{" "}
           <Link className="link" to="/login">
             here
           </Link>{" "}

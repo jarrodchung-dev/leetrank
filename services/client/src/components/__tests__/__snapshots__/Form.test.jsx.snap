@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login Form renders a snapshot successfully 1`] = `
+exports[`<Login Form /> (not authenticated) renders a snapshot successfully 1`] = `
 <div>
   <h1
     className="title"
@@ -24,6 +24,19 @@ exports[`Login Form renders a snapshot successfully 1`] = `
         <input
           className="input"
           name="email"
+          onChange={
+            [MockFunction] {
+              "calls": Array [
+                Array [],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
           type="email"
           value=""
         />
@@ -43,6 +56,19 @@ exports[`Login Form renders a snapshot successfully 1`] = `
         <input
           className="input"
           name="password"
+          onChange={
+            [MockFunction] {
+              "calls": Array [
+                Array [],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
           type="password"
           value=""
         />
@@ -58,7 +84,7 @@ exports[`Login Form renders a snapshot successfully 1`] = `
 </div>
 `;
 
-exports[`Register Form renders a snapshot successfully 1`] = `
+exports[`<Register Form /> (not authenticated) renders a snapshot successfully 1`] = `
 <div>
   <h1
     className="title"
@@ -82,6 +108,19 @@ exports[`Register Form renders a snapshot successfully 1`] = `
         <input
           className="input"
           name="username"
+          onChange={
+            [MockFunction] {
+              "calls": Array [
+                Array [],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
           type="text"
           value=""
         />
@@ -101,6 +140,19 @@ exports[`Register Form renders a snapshot successfully 1`] = `
         <input
           className="input"
           name="email"
+          onChange={
+            [MockFunction] {
+              "calls": Array [
+                Array [],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
           type="email"
           value=""
         />
@@ -120,6 +172,19 @@ exports[`Register Form renders a snapshot successfully 1`] = `
         <input
           className="input"
           name="password"
+          onChange={
+            [MockFunction] {
+              "calls": Array [
+                Array [],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
           type="password"
           value=""
         />

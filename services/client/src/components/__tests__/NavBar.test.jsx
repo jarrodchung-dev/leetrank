@@ -7,14 +7,24 @@ import NavBar from "../NavBar.jsx";
 const title = "NotHackerRank";
 
 describe("<NavBar />", () => {
-  it("should render properly", () => {
-    const wrapper = shallow(<NavBar title={title} />);
+  const component = <NavBar tite={title} isAuthenticated={false} />;
+
+  it("renders the title correctly", () => {
+    const wrapper = shallow(component);
     const element = wrapper.find("strong");
     expect(element.length).toBe(1);
-    expect(element.get(0).props.children).toBe(title);
   });
 
-  it("should render a snapshot successfully", () => {
+  it("should conditionally show navbar items based on user auth status", () => {
+    const wrapper = shallow(component);
+    const navbarItems = wrapper.find("Link.navbar-item");
+    expect(navbarItems.length).toBe(5);
+    expect(navbarItems.get(0).props.children).toBe("Home");
+    expect(navbarItems.get(1).props.children).toBe("About");
+    expect(navbarItems.get(2).props.children).toBe("Users");
+  });
+
+  it("renders a snapshot successfully", () => {
     const tree = renderer
       .create(
         <Router location="/">

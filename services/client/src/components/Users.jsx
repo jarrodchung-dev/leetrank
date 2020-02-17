@@ -8,7 +8,7 @@ const Users = (props) => {
           <div className="level" key={user.id}>
             <div className="level-left">
               <div className="level-item">
-                <p>{user.username}</p>
+                <p className="username">{user.username}</p>
               </div>
             </div>
           </div>

@@ -3,9 +3,8 @@ import React from "react";
 const AddUser = (props) => {
   return (
     <>
-      <h1 className="title">{props.title}</h1>
-      <hr />
       <form className="form" onSubmit={props.handleSubmit}>
+        <h1 className="title">{props.title}</h1>
         <div className="field">
           <label className="label">Username</label>
           <div className="control">
@@ -16,7 +15,6 @@ const AddUser = (props) => {
               type="text"
               placeholder="i.e. johnsmith"
               onChange={props.handleChange}
-              required
             />
           </div>
         </div>
@@ -30,7 +28,6 @@ const AddUser = (props) => {
               type="email"
               placeholder="i.e. johnsmith@example.com"
               onChange={props.handleChange}
-              required
             />
           </div>
         </div>
