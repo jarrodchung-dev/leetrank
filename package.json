@@ -1,0 +1,6 @@
+{
+  "name": "leetrank",
+  "devDependencies": {
+    "cypress": "^4.0.2"
+  }
+}
