@@ -10,13 +10,7 @@ const password = "testPassword";
  * 5. Should validate the password field
  */
 describe("Login", () => {
-  it("should display the login form", () => {
-    cy.visit("/login")
-      .get("h1")
-      .contains("Log In")
-      .get("form")
-      .get(`button[disabled]`);
-  });
+  it("should display the login form", () => {});
   it("should allow users to login", () => {});
   it("should throw an error if the login credentials are invalid", () => {});
   it("should allow users to log out after they have logged in", () => {});

@@ -8,21 +8,61 @@ inspect() {
     fi
 }
 
-docker-compose up -d --build
-docker-compose exec users python manage.py recreate-db
-docker-compose exec users python manage.py seed-db
-docker-compose exec users python manage.py test
-inspect $? users
+server() {
+    docker-compose up -d --build
+    docker-compose exec users python manage.py recreate-db
+    docker-compose exec users python manage.py test
+    inspect $? users
+    docker-compose down
+}
 
-docker-compose exec client npm run coverage
-inspect $? client
+client() {
+    docker-compose up -d -build
+    docker-compose exec client run coverage
+    inspect $? client
+    docker-compose down
+}
 
-docker-compose down
+e2e() {
+    docker-compose -f docker-compose-prod.yml up -d --build
+    docker-compose -f docker-compose-prod.yml exec users python manage.py recreate-db
+    ./node-modules/.bin/cypress run --config baseUrl=http://localhost
+    inpsect $? e2e 
+    docker-compose -f docker-compose-prod.yml down
+}
 
-if [ -n "${fails}" ]; then 
-    echo "Failed tests: ${fails}"
+all() {
+    docker-compose up -d --build
+    docker-compose  exec users python manage.py recreate-db
+    docker-compose  exec users python manage.py test
+    inspect $? users
+    docker-compose exec client npm run coverage
+    inpsect $? client
+    docker-compose down
+    e2e
+
+}
+
+if [[ "${type}" == "server" ]]; then 
+    echo ""
+    echo "Running server-side tests"
+    server
+elif [[ "${type}" == "client" ]]; then
+    echo ""
+    echo "Running client-side tests"
+    client
+elif [[ "${type}" == "e2e" ]]; then
+    echo ""
+    echo "Running all tests"
+    all
+fi
+
+if [ -n "${fails}" ]; then
+    echo ""
+    echo "Test failed: ${fails}"
     exit 1
 else
-    echo "All tests passed"
+    echo ""
+    echo "All tests pass"
     exit 0
 fi
