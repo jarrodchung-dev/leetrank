@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Message danger /> renders a snapshot successuly 1`] = `
+<div
+  className="container is-fluid has-text-centered"
+  id="notification"
+>
+  <div
+    className="notification is-danger"
+  >
+    <button
+      className="delete"
+      onClick={[Function]}
+    />
+    <span>
+      Danger message
+    </span>
+  </div>
+</div>
+`;
+
+exports[`<Message success /> renders a snapshot successuly 1`] = `
+<div
+  className="container is-fluid has-text-centered"
+  id="notification"
+>
+  <div
+    className="notification is-success"
+  >
+    <button
+      className="delete"
+      onClick={[Function]}
+    />
+    <span>
+      Successful message
+    </span>
+  </div>
+</div>
+`;

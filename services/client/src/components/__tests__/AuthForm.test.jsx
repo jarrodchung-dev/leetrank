@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
-import Form from "../Form.jsx";
+import AuthForm from "../AuthForm.jsx";
 
 const forms = [
   {
@@ -11,9 +11,7 @@ const forms = [
       username: "",
       email: "",
       password: ""
-    },
-    handleChange: jest.fn(),
-    handleSubmit: jest.fn()
+    }
   },
   {
     type: "Login",
@@ -21,22 +19,14 @@ const forms = [
     data: {
       email: "",
       password: ""
-    },
-    handleChange: jest.fn(),
-    handleSubmit: jest.fn()
+    }
   }
 ];
 
 forms.forEach((form) => {
   describe(`<${form.type} Form /> (not authenticated)`, () => {
     const component = (
-      <Form
-        type={form.type}
-        data={form.data}
-        handleChange={form.handleChange}
-        handleSubmit={form.handleSubmit}
-        isAuthenticated={false}
-      />
+      <AuthForm type={form.type} data={form.data} isAuthenticated={false} />
     );
     const wrapper = shallow(component);
 
@@ -49,20 +39,22 @@ forms.forEach((form) => {
     it("renders only the fields that were passed in as props", () => {
       const fields = wrapper.find(".field");
       expect(fields.length).toBe(Object.keys(form.data).length);
-      const prop = fields.get(0).props.children[1].props.children.props;
-      expect(prop.name).toBe(Object.keys(form.data)[0]);
-      expect(prop.value).toBe(Object.values(form.data)[0]);
     });
 
-    it("submits submits the form correctly", () => {
+    it("submits the form correctly", () => {
+      wrapper.instance().handleSubmit = jest.fn();
+      wrapper.update();
       const input = wrapper.find(`input[type="email"]`);
-      expect(form.handleChange).toHaveBeenCalledTimes(0);
-      expect(form.handleSubmit).toHaveBeenCalledTimes(0);
-      input.simulate("change");
-      expect(form.handleChange).toHaveBeenCalledTimes(1);
+      expect(wrapper.instance().handleSubmit).toHaveBeenCalledTimes(0);
+      input.simulate("change", {
+        target: {
+          name: "email",
+          value: "test_user@example.com"
+        }
+      });
       wrapper.find("form").simulate("submit", form.data);
-      expect(form.handleSubmit).toHaveBeenCalledWith(form.data);
-      expect(form.handleSubmit).toHaveBeenCalledTimes(1);
+      expect(wrapper.instance().handleSubmit).toHaveBeenCalledWith(form.data);
+      expect(wrapper.instance().handleSubmit).toHaveBeenCalledTimes(1);
     });
 
     it("renders a snapshot successfully", () => {
@@ -73,17 +65,11 @@ forms.forEach((form) => {
 
   describe(`<${form.type} Form /> (authenticated)`, () => {
     const component = (
-      <Form
-        type={form.type}
-        data={form.data}
-        handleChange={form.handleChange}
-        handleSubmit={form.handleSubmit}
-        isAuthenticated={true}
-      />
+      <AuthForm type={form.type} data={form.data} isAuthenticated={true} />
     );
     const wrapper = shallow(component);
 
-    it("redirects away from <Form />", () => {
+    it("redirects away from <AuthForm />", () => {
       expect(wrapper.find("Redirect")).toHaveLength(1);
     });
   });

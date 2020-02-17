@@ -11,6 +11,11 @@ body {
   letter-spacing: 0.01em;
 }
 
+section .section {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
 #brand {
   font-size: 25px;
 }
@@ -44,6 +49,46 @@ button[type="submit"]:focus {
   box-shadow: none;
 }
 
+button[disabled] {
+  color: gray;
+  background-color: darkgray;
+}
+
+button[disabled]:hover,
+button[disabled]:focus {
+  color: gray;
+  background-color: darkgray;
+}
+
 footer .footer {
   display: block;
 }
+
+div #form-rules {
+  padding-bottom: 3%;
+}
+
+li.valid {
+  color: #5bc773;
+}
+
+li.invalid {
+  color: #ea4668;
+}
+
+div .message {
+  border-radius: 0px;
+}
+
+div .message-header {
+  border-radius: 0px;
+}
+
+div .message-body {
+  border-radius: 0px;
+}
+
+div .notification {
+  height: 25%;
+}
+

@@ -24,19 +24,7 @@ exports[`<Login Form /> (not authenticated) renders a snapshot successfully 1`] 
         <input
           className="input"
           name="email"
-          onChange={
-            [MockFunction] {
-              "calls": Array [
-                Array [],
-              ],
-              "results": Array [
-                Object {
-                  "type": "return",
-                  "value": undefined,
-                },
-              ],
-            }
-          }
+          onChange={[Function]}
           type="email"
           value=""
         />
@@ -56,19 +44,7 @@ exports[`<Login Form /> (not authenticated) renders a snapshot successfully 1`] 
         <input
           className="input"
           name="password"
-          onChange={
-            [MockFunction] {
-              "calls": Array [
-                Array [],
-              ],
-              "results": Array [
-                Object {
-                  "type": "return",
-                  "value": undefined,
-                },
-              ],
-            }
-          }
+          onChange={[Function]}
           type="password"
           value=""
         />
@@ -76,6 +52,7 @@ exports[`<Login Form /> (not authenticated) renders a snapshot successfully 1`] 
     </div>
     <button
       className="button"
+      disabled={false}
       type="submit"
     >
       Submit
@@ -108,19 +85,7 @@ exports[`<Register Form /> (not authenticated) renders a snapshot successfully 1
         <input
           className="input"
           name="username"
-          onChange={
-            [MockFunction] {
-              "calls": Array [
-                Array [],
-              ],
-              "results": Array [
-                Object {
-                  "type": "return",
-                  "value": undefined,
-                },
-              ],
-            }
-          }
+          onChange={[Function]}
           type="text"
           value=""
         />
@@ -140,19 +105,7 @@ exports[`<Register Form /> (not authenticated) renders a snapshot successfully 1
         <input
           className="input"
           name="email"
-          onChange={
-            [MockFunction] {
-              "calls": Array [
-                Array [],
-              ],
-              "results": Array [
-                Object {
-                  "type": "return",
-                  "value": undefined,
-                },
-              ],
-            }
-          }
+          onChange={[Function]}
           type="email"
           value=""
         />
@@ -172,19 +125,7 @@ exports[`<Register Form /> (not authenticated) renders a snapshot successfully 1
         <input
           className="input"
           name="password"
-          onChange={
-            [MockFunction] {
-              "calls": Array [
-                Array [],
-              ],
-              "results": Array [
-                Object {
-                  "type": "return",
-                  "value": undefined,
-                },
-              ],
-            }
-          }
+          onChange={[Function]}
           type="password"
           value=""
         />
@@ -192,6 +133,7 @@ exports[`<Register Form /> (not authenticated) renders a snapshot successfully 1
     </div>
     <button
       className="button"
+      disabled={false}
       type="submit"
     >
       Submit

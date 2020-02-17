@@ -9,19 +9,23 @@ class UserStatus extends Component {
       id: "",
       email: "",
       username: "",
-      active: ""
+      active: "",
+      admin: "",
+      isAutheenticated: false
     };
     this.getUserStatus = this.getUserStatus.bind(this);
   }
   componentDidMount() {
-    if (this.props.isAuthenticated) {
-      this.getUserStatus();
+    if (window.localStorage.getItem("authToken")) {
+      this.setState({ isAutheenticated: true }, () => {
+        this.getUserStatus();
+      });
     }
   }
   getUserStatus(event) {
     const options = {
       url: `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/status`,
-      method: "GET",
+      method: "get",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${window.localStorage.authToken}`
@@ -29,17 +33,20 @@ class UserStatus extends Component {
     };
     return axios(options)
       .then((res) => {
-        console.log(res.data);
         this.setState({
-          id: res.data.data.id,
           email: res.data.data.email,
-          username: res.data.data.username
+          id: res.data.data.id,
+          username: res.data.data.username,
+          active: String(res.data.data.active),
+          admin: String(res.data.data.admin)
         });
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        console.log(error);
+      });
   }
   render() {
-    if (!this.props.isAutheenticated) {
+    if (!this.state.isAutheenticated) {
       return (
         <>
           <p>You must be logged in to view this page.</p>
@@ -52,13 +59,14 @@ class UserStatus extends Component {
     }
     return (
       <>
-        <div className="container">
+        <div className="container has-text-centered">
           <table className="table is-hoverable is-striped is-fullwdith">
             <thead>
               <tr>
                 <td>ID</td>
                 <td>Email</td>
                 <td>Username</td>
+                <td>Active</td>
               </tr>
             </thead>
             <tbody>
@@ -66,6 +74,7 @@ class UserStatus extends Component {
                 <td>{this.state.id}</td>
                 <td>{this.state.email}</td>
                 <td>{this.state.username}</td>
+                <td>{this.state.acitve}</td>
               </tr>
             </tbody>
           </table>

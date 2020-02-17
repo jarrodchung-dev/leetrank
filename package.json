@@ -1,6 +1,10 @@
 {
   "name": "leetrank",
+  "scripts": {
+    "test": "node_modules/.bin/cypress open"
+  },
   "devDependencies": {
-    "cypress": "^4.0.2"
+    "cypress": "^4.0.2",
+    "randomstring": "^1.1.5"
   }
 }
