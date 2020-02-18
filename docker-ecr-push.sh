@@ -5,12 +5,11 @@ then
 
   if [[ "$TRAVIS_BRANCH" == "staging" ]]; then
     export DOCKER_ENV=stage
-    export REACT_APP_USERS_SERVICE_URL=\
-      "http://leetrank-staging-alb-59231334.us-east-1.elb.amazonaws.com"
+    export REACT_APP_USERS_SERVICE_URL=$LOAD_BALANCER_STAGE_DNS
   elif [[ "$TRAVIS_BRANCH" == "production" ]]; then
     export DOCKER_ENV=prod
-    export REACT_APP_USERS_SERVICE_URL=\
-      "http://leetrank-production-alb-1817708648.us-east-1.elb.amazonaws.com"
+    export REACT_APP_USERS_SERVICE_URL=$LOAD_BALANCER_PROD_DNS
+    export DATABASE_URL=$AWS_RDS_URI
   fi
 
   if [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ] 
@@ -21,7 +20,7 @@ then
     export PATH=~/bin:$PATH
     eval $(aws ecr get-login --region us-east-1 --no-include-email)
     export TAG=$TRAVIS_BRANCH
-    export REPO=$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
+    export REPO=$REPO
   fi
 
   if [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ]
