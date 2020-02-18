@@ -10,6 +10,7 @@ then
     export DOCKER_ENV=prod
     export REACT_APP_USERS_SERVICE_URL=$LOAD_BALANCER_PROD_DNS
     export DATABASE_URL=$AWS_RDS_URI
+    export SECRET_KEY=$PRODUCTION_SECRET_KEY
   fi
 
   if [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ] 

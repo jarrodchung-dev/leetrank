@@ -36,21 +36,21 @@ then
       cluster="leetrank-production-cluster"
 
       service="leetrank-users-prod-service"
-      template="ecs_users_prod_taskdefinition.json"
+      template="ecs-users-prod-taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_RDS_URI $PRODUCTION_SECRET_KEY)
       echo "$task_def"
       register_task_definition
 
       service="leetrank-client-prod-service"
-      template="ecs_client_prod_taskdefinition.json"
+      template="ecs-client-prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_task_definition
 
       service="leetrank-swagger-prod-service"
-      template="ecs_swagger_prod_taskdefinition.json"
+      template="ecs-swagger-prod-taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
