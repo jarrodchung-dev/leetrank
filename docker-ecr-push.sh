@@ -12,10 +12,10 @@ then
   then 
     curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
     unzip awscli-bundle.zip
-    ./awscli-bundle/install -b ~/BIN/AWS
+    ./awscli-bundle/install -b ~/bin/aws
     export PATH=~/bin:$PATH
 
-    eval $(aws ecr get-login --region us-east-1 --no-include-email)
+    eval $(aws ecr get-login-password)
     export TAG=$TRAVIS_BRANCH
     export REPO=$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
   fi
