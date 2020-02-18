@@ -32,5 +32,4 @@ script:
   - bash run-ci-tests.sh $TRAVIS_BRANCH
 
 after_success:
-  - chmod +x ./docker-ecr-push.sh
   - bash ./docker-ecr-push.sh
