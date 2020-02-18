@@ -5,7 +5,7 @@ then
 
   if [[ "$TRAVIS_BRANCH" == "staging" ]]; then
     export DOCKER_ENV=stage
-    export REACT_APP_USERS_SERVICE_URL="LOAD_BALANCER_STAGE_DNS_NAME"
+    export REACT_APP_USERS_SERVICE_URL="leetrank-staging-alb-59231334.us-east-1.elb.amazonaws.com"
   elif [[ "$TRAVIS_BRANCH" == "production" ]]; then
     export DOKCER_ENV=prod
   fi
@@ -16,7 +16,7 @@ then
     unzip awscli-bundle.zip
     ./awscli-bundle/install -b ~/bin/aws
     export PATH=~/bin:$PATH
-
+    aws configure --region 
     eval $(aws ecr get-login-password)
     export TAG=$TRAVIS_BRANCH
     export REPO=$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
