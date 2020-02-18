@@ -1,7 +1,9 @@
-sudo: required
+os: linux
 
 services:
   - docker
+
+language: python
 
 env:
   DOCKER_COMPOSE_VERSION: 1.25.4
@@ -33,4 +35,5 @@ script:
 
 after_success:
   - bash ./docker-ecr-push.sh
-  - bash ./docker-staging-deploy.sh
+  - bash ./docker-deploy-staging.sh
+  - bash ./docker-deploy-production.sh
