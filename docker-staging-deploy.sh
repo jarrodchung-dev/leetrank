@@ -8,9 +8,8 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then
   if [ "$TRAVIS_BRANCH" == "staging" ] 
   then
-
     JQ="jq --raw-output --exit-status" 
-
+    
     configure_aws_cli() {
       aws --version
       aws configure set default.region us-east-1
@@ -19,10 +18,11 @@ then
     }
 
     register_task_definition() {
-      if revision=$(aws ecs register-task-definition \
+      if revision=$(
+        aws ecs register-task-definition \
         --cli-input json "$task_definition" \
         | $JQ '.taskDefinition.taskDefinitionArn'
-      );
+      )
       then 
         echo "Revision: $revision"
       else
