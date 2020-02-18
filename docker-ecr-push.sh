@@ -4,6 +4,7 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then 
   if [[ "$TRAVIS_BRANCH" == "staging" ]]; then
     export DOCKER_ENV=stage
+    export REACT_APP_USERS_SERVICE_URL="LOAD_BALANCER_STAGE_DNS_NAME"
   elif [[ "$TRAVIS_BRANCH" == "production" ]]; then
     export DOKCER_ENV=prod
   fi
@@ -20,7 +21,7 @@ then
     export REPO=$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
   fi
 
-  if [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH}" == "production" ]
+  if [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ]
   then
     docker build $USERS_REPO -t $USERS:$COMMIT -f Dockerfile-$DOCKER_ENV
     docker tag $USERS:$COMMIT $REPO/$USERS:$TAG
