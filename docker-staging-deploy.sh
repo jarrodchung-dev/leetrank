@@ -16,8 +16,7 @@ then
 
     register_task_definition() {
       if revision=$(aws ecs register-task-definition \
-        --family "$family" \
-        --cli-input json "$task_definition" | $JQ '.taskDefinition.taskDefinitionArn');
+        --cli-input-json "$task_definition" | $JQ '.taskDefinition.taskDefinitionArn');
       then 
         echo "Revision: $revision"
       else
