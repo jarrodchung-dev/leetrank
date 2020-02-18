@@ -1,11 +1,14 @@
 {
-  "family": "leetrank-client-stage-td",
   "containerDefinitions": [
     {
-      "name": "client",
-      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-client:staging",
-      "essential": true,
-      "memoryReservation": 300,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "leetrank-client-stage",
+          "awslogs-region": "us-east-1"
+        }
+      },
       "portMappings": [
         {
           "hostPort": 0,
@@ -13,13 +16,13 @@
           "containerPort": 80
         }
       ],
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "leetrank-client-stage",
-          "awslogs-region": "us-east-1"
-        }
-      }
+      "memoryReservation": 300,
+      "volumesFrom": [],
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-client:staging",
+      "name": "client"
     }
-  ]
+  ],
+  "compatibilities": ["EC2"],
+  "family": "leetrank-client-stage-td",
+  "requiresCompatibilities": ["EC2"]
 }

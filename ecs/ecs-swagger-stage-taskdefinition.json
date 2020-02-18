@@ -1,11 +1,14 @@
 {
-  "family": "leetrank-swagger-stage-td",
   "containerDefinitions": [
     {
-      "name": "swagger",
-      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-swagger:staging",
-      "essential": true,
-      "memoryReservation": 300,
+      "dnsSearchDomains": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "leetrank-swagger-stage",
+          "awslogs-region": "us-east-1"
+        }
+      },
       "portMappings": [
         {
           "hostPort": 0,
@@ -19,13 +22,12 @@
           "value": "swagger.json"
         }
       ],
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "leetrank-swagger-stage",
-          "awslogs-region": "us-east-1"
-        }
-      }
+      "memoryReservation": 300,
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-swagger:staging",
+      "name": "swagger"
     }
-  ]
+  ],
+  "compatibilities": ["EC2"],
+  "family": "leetrank-swagger-stage-td",
+  "requiresCompatibilities": ["EC2"]
 }

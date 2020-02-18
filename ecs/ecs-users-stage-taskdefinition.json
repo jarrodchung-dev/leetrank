@@ -1,9 +1,6 @@
 {
-  "ipcMode": null,
-  "executionRoleArn": null,
   "containerDefinitions": [
     {
-      "dnsSearchDomains": null,
       "logConfiguration": {
         "logDriver": "awslogs",
         "secretOptions": null,
@@ -12,7 +9,6 @@
           "awslogs-region": "us-east-1"
         }
       },
-      "entryPoint": null,
       "portMappings": [
         {
           "hostPort": 0,
@@ -38,8 +34,9 @@
           "value": "3cfaec6e8b66603e474fdf40c690dcc34a02c24b211893d5"
         }
       ],
-      "memoryReservation": 300,
-      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-users:staging"
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-users:staging",
+      "links": ["users-db"],
+      "name": "users"
     },
     {
       "logConfiguration": {
@@ -69,9 +66,9 @@
       ],
       "memoryReservation": 300,
       "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-users_db:staging",
-      "essential": true,
       "name": "users-db"
     }
   ],
+  "compatibilities": ["EC2"],
   "family": "leetrank-users-stage-td"
 }
