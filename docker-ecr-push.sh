@@ -15,25 +15,15 @@ then
     unzip awscli-bundle.zip
     ./awscli-bundle/install -b ~/bin/aws
     export PATH=~/bin:$PATH
-    eval $(aws ecr get-login --region us-east-1 -registry-ids $AWS_ACCOUNT_ID)
+    eval $(aws ecr get-login --region us-east-1 --no-include-email)
     export TAG=$TRAVIS_BRANCH
     export REPO=$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
   fi
 
   if [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ]
   then
-    echo "Building, tagging and pushing Docker images"
-
-    echo "Building 'users' image"
-    echo "USERS_REPO --> ${USERS_REPO}"
-    echo "USERS --> ${USERS}"
-    echo "COMMIT --> ${COMMIT}"
     docker build $USERS_REPO -t $USERS:$COMMIT -f Dockerfile-$DOCKER_ENV
-    echo "Tagging 'users' image"
-    echo "TAG --> ${TAG}"
     docker tag $USERS:$COMMIT $REPO/$USERS:$TAG
-    echo "Pushing 'users' image"
-    echo "REPO:/USERS:TAG --> ${REPO}/${USERS}:${TAG}"
     docker push $REPO/$USERS:$TAG
 
     docker build $USERS_DB_REPO -t $USERS_DB:$COMMIT -f Dockerfile
