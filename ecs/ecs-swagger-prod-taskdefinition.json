@@ -2,12 +2,13 @@
   "containerDefinitions": [
     {
       "name": "swagger",
-      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/flaskreactrank-swagger:staging",
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-swagger:production",
       "essential": true,
+
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "flaskreactrank-swagger-stage",
+          "awslogs-group": "leetrank-swagger-prod",
           "awslogs-region": "us-east-1"
         }
       },
@@ -27,5 +28,5 @@
       "memoryReservation": 300
     }
   ],
-  "family": "flaskreactrank-swagger-td-stage"
+  "family": "leetrank-swagger-prod-td"
 }

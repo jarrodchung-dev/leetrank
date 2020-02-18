@@ -12,10 +12,10 @@ env:
   USERS_DB: leetrank-users_db
   USERS_DB_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/users/project/db
   CLIENT: leetrank-client
-  CLIENT_REPO: ${MAIN_REPO}#{TRAVIS_BRANCH}:/services/client
+  CLIENT_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/client
   SWAGGER: leetrank-swagger
   SWAGGER_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/swagger
-  SECRET_KEY: 3cfaec6e8b66603e474fdf40c690dcc34a02c24b211893d5
+  SECRET_KEY: nostalgia_ultra
 
 before_install:
   - sudo apt-get update
@@ -32,5 +32,5 @@ script:
   - bash run-ci-tests.sh $TRAVIS_BRANCH
 
 after_success:
-  - chmod +x ./docker-ecr-push.sh
   - bash ./docker-ecr-push.sh
+  - bash ./docker-staging-deploy.sh

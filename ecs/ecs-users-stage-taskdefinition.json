@@ -2,7 +2,7 @@
   "containerDefinitions": [
     {
       "name": "users",
-      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/flaskreactrank-users:production",
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-users:staging",
       "essential": true,
       "memoryReservation": 300,
       "portMappings": [
@@ -15,7 +15,7 @@
       "environment": [
         {
           "name": "APP_SETTINGS",
-          "value": "project.config.ProductionConfig"
+          "value": "project.config.StagingConfig"
         },
         {
           "name": "DATABASE_TEST_URL",
@@ -23,27 +23,25 @@
         },
         {
           "name": "DATABASE_URL",
-          "value": "postgres://postgres:postgres@users-db:5432/users_prod"
+          "value": "postgres://postgres:postgres@users-db:5432/users_stage"
         },
         {
           "name": "SECRET_KEY",
           "value": "nostalgia_ultra"
         }
       ],
-      "links": [
-        "users-db"
-      ],
+      "links": ["users-db"],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "flaskreactrank-users-prod",
+          "awslogs-group": "leetrank-users-stage",
           "awslogs-region": "us-east-1"
         }
       }
     },
     {
       "name": "users-db",
-      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/flaskreactrank-users_db:production",
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/test-driven-users_db:staging",
       "essential": true,
       "memoryReservation": 300,
       "portMappings": [
@@ -66,11 +64,11 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "flaskreactrank-users_db-prod",
+          "awslogs-group": "leetrank-users_db-stage",
           "awslogs-region": "us-east-1"
         }
       }
     }
   ],
-  "family": "flaskreactrank-users-td-prod"
+  "family": "leetrank-users-stage-td"
 }

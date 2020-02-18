@@ -2,24 +2,24 @@
   "containerDefinitions": [
     {
       "name": "client",
-      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/flaskreactrank-client:staging",
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-client:staging",
       "essential": true,
       "memoryReservation": 300,
       "portMappings": [
         {
           "hostPort": 0,
-          "protocol": "tcp", 
+          "protocol": "tcp",
           "containerPort": 80
         }
       ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "flaskreactrank-client-stage",
+          "awslogs-group": "leetrank-client-stage",
           "awslogs-region": "us-east-1"
         }
       }
     }
   ],
-  "family": "flaskreactrank-client-td-stage"
+  "family": "leetrank-client-stage-td"
 }
