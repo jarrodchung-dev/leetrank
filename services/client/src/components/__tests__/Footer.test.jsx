@@ -7,6 +7,7 @@ describe("<Footer />", () => {
   it("renders properly", () => {
     const wrapper = shallow(<Footer />);
     const span = wrapper.find("span");
+    expect(span.length).toBe(1);
     expect(span.text()).toBe("Copyright © 2020 Jarrod Chung");
   });
 

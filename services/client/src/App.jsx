@@ -10,6 +10,7 @@ import AuthForm from "./components/AuthForm.jsx";
 import Logout from "./components/Logout.jsx";
 import About from "./components/About.jsx";
 import UserStatus from "./components/UserStatus.jsx";
+import ChallengeProblems from "./components/ChallengeProblems.jsx";
 import Footer from "./components/Footer.jsx";
 
 class App extends Component {
