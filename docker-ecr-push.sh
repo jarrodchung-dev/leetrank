@@ -2,6 +2,7 @@
 
 if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then 
+
   if [[ "$TRAVIS_BRANCH" == "staging" ]]; then
     export DOCKER_ENV=stage
     export REACT_APP_USERS_SERVICE_URL="LOAD_BALANCER_STAGE_DNS_NAME"
@@ -28,11 +29,11 @@ then
     docker push $REPO/$USERS:$TAG
 
     docker build $USERS_DB_REPO -t $USERS_DB:$COMMIT -f Dockerfile
-    docker tag $USERS_DB:$COMMIT $REPO/$USERS_DB $TAG
+    docker tag $USERS_DB:$COMMIT $REPO/$USERS_DB:$TAG
     docker push $REPO/$USERS_DB:$TAG
 
     docker build $CLIENT_REPO -t $CLIENT:$COMMIT -f Dockerfile-$DOCKER_ENV \
-      --build-arg REACT_APP_USERS_SERVICE_URL=TBD
+      --build-arg REACT_APP_USERS_SERVICE_URL=$REACT_APP_USERS_SERVICE_URL
     docker tag $CLIENT:$COMMIT $REPO/$CLIENT:$TAG
     docker push $REPO/$CLIENT:$TAG
 
@@ -41,6 +42,3 @@ then
     docker push $REPO/$SWAGGER:$TAG
   fi
 fi
-
-# If the branch is either "staging" or "production" and it's not a pull request
-# download the AWS CLI to log in to AWS set the $TAG and $REPO for each container.
