@@ -20,7 +20,8 @@ then
 
     register_task_definition() {
       if revision=$(aws ecs register-task-definition \
-        --cli-input json "$task_definition" | $JQ '.taskDefinition.taskDefinitionArn'
+        --cli-input json "$task_definition" \
+        | $JQ '.taskDefinition.taskDefinitionArn'
       );
       then 
         echo "Revision: $revision"
@@ -30,25 +31,47 @@ then
       fi
     }
 
+    update_service() {
+      if [[ $(aws ecs update-service \
+        --cluster $cluster \
+        --service $service \
+        --task-definition $revision \
+        | $JQ '.service.taskDefinition')
+        != $revision 
+      ]];
+      then 
+        echo "Error updating service."
+        return 1
+      fi
+    }
+
     deploy_ecs_cluster() {
+
+      cluster="leetrank-staging-cluster"
       # users
+      service="leetrank-users-stage-service"
       template="ecs-users-stage-taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_definition=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "New Task Definition: $task_definition"
       register_task_definition
+      update_service
 
+      service="leetrank-client-stage-service"
       template="ecs-client-stage-taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_definition=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "New Task Definition: $task_definition"
       register_task_definition
+      update_service
 
+      service="leetrank-swagger-stage-service"
       template="ecs-swagger-stage-taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_definition=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "New Task Definition: $task_definition"
       register_task_definition
+      update_service
     }
 
     configure_aws_cli
