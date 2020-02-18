@@ -9,3 +9,4 @@ dm-env-prod.sh
 workflow.sh
 notes.md
 scripts.sh
+deploy-local.sh

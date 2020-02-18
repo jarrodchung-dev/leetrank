@@ -15,6 +15,7 @@ env:
   CLIENT_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/client
   SWAGGER: leetrank-swagger
   SWAGGER_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/swagger
+  SECRET_KEY: nostalgia_ultra
 
 before_install:
   - sudo apt-get update
@@ -32,5 +33,5 @@ script:
 
 after_success:
   - bash ./docker-ecr-push.sh
-  - bash ./docker-staging-deploy.sh
-  - bash ./docker-production-deploy.sh
+  
+
