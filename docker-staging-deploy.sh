@@ -16,6 +16,7 @@ then
 
     register_task_definition() {
       if revision=$(aws ecs register-task-definition \
+        --family "$family" \
         --cli-input json "$task_definition" | $JQ '.taskDefinition.taskDefinitionArn');
       then 
         echo "Revision: $revision"
@@ -38,6 +39,7 @@ then
       cluster="leetrank-staging-cluster"
 
       service="leetrank-users-stage-service"
+      family="leetrank-users-stage-td"
       template="ecs-users-stage-taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_definition=$(printf "$task_template" $AWS_ACCOUNT_ID)
@@ -46,6 +48,7 @@ then
       update_service
 
       service="leetrank-client-stage-service"
+      family="leetrank-client-stage-td"
       template="ecs-client-stage-taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_definition=$(printf "$task_template" $AWS_ACCOUNT_ID)
@@ -54,6 +57,7 @@ then
       update_service
 
       service="leetrank-swagger-stage-service"
+      family="leetrank-swagger-stage-td"
       template="ecs-swagger-stage-taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_definition=$(printf "$task_template" $AWS_ACCOUNT_ID)
