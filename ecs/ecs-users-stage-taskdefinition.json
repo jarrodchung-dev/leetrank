@@ -1,0 +1,74 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "users",
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-users:staging",
+      "essential": true,
+      "memoryReservation": 300,
+      "portMappings": [
+        {
+          "hostPort": 0,
+          "protocol": "tcp",
+          "containerPort": 5000
+        }
+      ],
+      "environment": [
+        {
+          "name": "APP_SETTINGS",
+          "value": "project.config.StagingConfig"
+        },
+        {
+          "name": "DATABASE_URL",
+          "value": "postgres://postgres:postgres@users-db:5432/users_stage"
+        },
+        {
+          "name": "DATABASE_TEST_URL",
+          "value": "postgres://postgres:postgres@users-db:5432/users_test"
+        },
+        {
+          "name": "SECRET_KEY",
+          "value": "3cfaec6e8b66603e474fdf40c690dcc34a02c24b211893d5"
+        }
+      ],
+      "links": ["users-db"],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "leetrank-users-stage",
+          "awslogs-region": "us-east-1"
+        }
+      }
+    },
+    {
+      "name": "users-db",
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-users_db:staging",
+      "essential": true,
+      "memoryReservation": 300,
+      "portMappings": [
+        {
+          "hostPort": 0,
+          "protocol": "tcp",
+          "containerPort": 5432
+        }
+      ],
+      "environment": [
+        {
+          "name": "POSTGRES_USER",
+          "value": "postgres"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "value": "postgres"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "leetrank-users_db-stage",
+          "awslogs-region": "us-east-1"
+        }
+      }
+    }
+  ],
+  "family": "leetrank-users-stage-td"
+}
