@@ -49,7 +49,7 @@ const NavBar = (props) => {
               <Link to="/about" className="navbar-item">
                 About
               </Link>
-              <Link to="/users" className="navbar-item">
+              <Link to="/all-users" className="navbar-item">
                 Users
               </Link>
               {props.isAuthenticated && (
