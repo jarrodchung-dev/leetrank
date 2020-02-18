@@ -20,9 +20,9 @@ dev() {
 }
 
 e2e() {
-    docker-compose -f docker-compose-$1.yml up -d --build
-    docker-compose -f docker-compose-$1.yml exec users python manage.py recreate-db
-    docker-compose -f docker-compose-$1.yml exec users python manage.py seed-db
+    docker-compose -f docker-compose-stage.yml up -d --build
+    docker-compose -f docker-compose-stage.yml exec users python manage.py recreate-db
+    docker-compose -f docker-compose-stage.yml exec users python manage.py seed-db
     ./node_modules/.bin/cypress run --config baseUrl=http://localhost
     inspect $? e2e
     docker-compose -f docker-compose-$1.yml down

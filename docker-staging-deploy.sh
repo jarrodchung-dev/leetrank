@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# If the branch is staging and not a pull request, the AWS CLI is configured 
-# and then the deploy_ecs_cluster function is fired which updates the existing
-# Task Definitions found in the JSON files from the ecs directory.
-
 if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ] 
 then
   if [ "$TRAVIS_BRANCH" == "staging" ] 
@@ -20,8 +16,7 @@ then
 
     register_task_definition() {
       if revision=$(aws ecs register-task-definition \
-        --cli-input json "$task_definition" | $JQ '.taskDefinition.taskDefinitionArn'
-      );
+        --cli-input json "$task_definition" | $JQ '.taskDefinition.taskDefinitionArn');
       then 
         echo "Revision: $revision"
       else
@@ -31,7 +26,8 @@ then
     }
 
     update_service() {
-      if [[ $(aws ecs update-service --cluster $cluster --service $service --task-definition) != $revision ]];
+      if [[ $(aws ecs update-service --cluster $cluster \
+        --service $service --task-definition) != $revision ]];
       then
         echo "Error updating the ECS service"
         return 1
