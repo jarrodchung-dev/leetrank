@@ -28,7 +28,7 @@ then
     docker push $REPO/$USERS:$TAG
 
     docker build $USERS_DB_REPO -t $USERS_DB:$COMMIT -f Dockerfile
-    docker tag $USERS_DB:$COMMIT $REPO:/$USERS_DB $TAG
+    docker tag $USERS_DB:$COMMIT $REPO/$USERS_DB $TAG
     docker push $REPO/$USERS_DB:$TAG
 
     docker build $CLIENT_REPO -t $CLIENT:$COMMIT -f Dockerfile-$DOCKER_ENV \
@@ -37,7 +37,7 @@ then
     docker push $REPO/$CLIENT:$TAG
 
     docker build $SWAGGER_REPO -t $SWAGGER:$COMMIT -f Dockerfile-$DOCKER_ENV
-    docker tag $SWAGGER:$COMMIT $REPO:$SWAGGER:$TAG
+    docker tag $SWAGGER:$COMMIT $REPO$SWAGGER:$TAG
     docker push $REPO/$SWAGGER:$TAG
   fi
 fi
