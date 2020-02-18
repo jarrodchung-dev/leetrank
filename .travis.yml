@@ -33,5 +33,4 @@ script:
 
 after_success:
   - bash ./docker-ecr-push.sh
-  
-
+  - bash ./docker-deploy-stage.sh
