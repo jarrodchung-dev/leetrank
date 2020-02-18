@@ -1,7 +1,10 @@
 {
   "containerDefinitions": [
     {
-      "dnsSearchDomains": null,
+      "name": "swagger",
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-swagger:staging",
+      "essential": true,
+
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
@@ -22,12 +25,8 @@
           "value": "swagger.json"
         }
       ],
-      "memoryReservation": 300,
-      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/leetrank-swagger:staging",
-      "name": "swagger"
+      "memoryReservation": 300
     }
   ],
-  "compatibilities": ["EC2"],
-  "family": "leetrank-swagger-stage-td",
-  "requiresCompatibilities": ["EC2"]
+  "family": "leetrank-swagger-stage-td"
 }
