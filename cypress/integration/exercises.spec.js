@@ -6,7 +6,7 @@ const password = "random_password";
 describe("Exercises", () => {
   it("should display the exercises correctly if a user is not logged in", () => {
     cy.visit("/")
-      .get("h1")
+      .get("h3.title")
       .contains("Exercises")
       .get(".notification.is-warning")
       .contains("Please log in to submit an exercise.")

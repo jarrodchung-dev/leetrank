@@ -3,7 +3,7 @@
 exports[`<Exercises /> renders a snapshot successfully 1`] = `
 <div>
   <h1
-    className="title is-1"
+    className="title is-3"
   >
     Exercises
   </h1>

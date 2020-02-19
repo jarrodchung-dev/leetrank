@@ -43,7 +43,23 @@ class Exercises extends Component {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   }
-  getExercises() {}
+  getExercises() {
+    const exercises = [
+      {
+        id: 0,
+        body: "Define a function called sum..."
+      },
+      {
+        id: 1,
+        body: "Define a function called reverse..."
+      },
+      {
+        id: 2,
+        body: "Define a function called factorial..."
+      }
+    ];
+    return this.setState({ exercises });
+  }
   renderButtons() {}
   nextExercise() {}
   prevExercise() {}
@@ -51,7 +67,7 @@ class Exercises extends Component {
   render() {
     return (
       <div>
-        <h1 className="title is-1">Exercises</h1>
+        <h1 className="title is-3">Exercises</h1>
         <hr />
         {!this.props.isAuthenticated && (
           <div className="notification is-warning">
@@ -63,7 +79,7 @@ class Exercises extends Component {
             exercise={this.state.exercises[this.state.currentExercise]}
             editor={this.state.editor}
             isAuthenticated={this.props.isAuthenticated}
-            onChange={this.onChange}
+            onChange={this.handleChange}
             submitExercise={this.submitExercise}
           />
         )}
