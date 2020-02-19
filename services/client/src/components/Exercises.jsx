@@ -34,7 +34,15 @@ class Exercises extends Component {
     editor.value = value;
     this.setState(editor);
   }
-  submitExercise(event, id) {}
+  submitExercise(event, id) {
+    event.preventDefault();
+    const data = { answer: this.state.editor.value };
+    const url = process.env.REACT_APP_API_GATEWAY_URL;
+    axios
+      .post(url, data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
   getExercises() {}
   renderButtons() {}
   nextExercise() {}

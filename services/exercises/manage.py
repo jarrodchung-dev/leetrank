@@ -1,5 +1,6 @@
 import sys
 import unittest
+import werkzeug
 
 from coverage import Coverage
 from flask.cli import FlaskGroup

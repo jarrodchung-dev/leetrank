@@ -8,7 +8,6 @@ WORKDIR /usr/src/app
 
 COPY ./requirements.txt /usr/src/app/requirements.txt
 RUN pip install --upgrade pip
-RUN pip install psycopg2-binary
 RUN pip install -r requirements.txt
 
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
