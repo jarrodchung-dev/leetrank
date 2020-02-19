@@ -1,9 +1,11 @@
-os: linux
+os:
+  - linux
 
 services:
   - docker
 
 language: python
+
 python:
   - "3.8"
 
