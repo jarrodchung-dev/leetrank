@@ -7,6 +7,7 @@ import Message from "./components/Message.jsx";
 import Users from "./components/Users.jsx";
 import AddUser from "./components/AddUser.jsx";
 import AuthForm from "./components/AuthForm.jsx";
+import Exercises from "./components/Exercises.jsx";
 import Logout from "./components/Logout.jsx";
 import About from "./components/About.jsx";
 import UserStatus from "./components/UserStatus.jsx";
@@ -77,7 +78,9 @@ class App extends Component {
                   <Route
                     exact
                     path="/"
-                    render={() => <Home title={this.state.title} />}
+                    render={() => (
+                      <Exercises isAuthenticated={this.state.isAuthenticated} />
+                    )}
                   />
                   <Route
                     exact
