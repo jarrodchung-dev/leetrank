@@ -1,13 +1,7 @@
-os:
-  - linux
+sudo: required
 
 services:
   - docker
-
-language: python
-
-python:
-  - "3.8"
 
 env:
   DOCKER_COMPOSE_VERSION: 1.25.4
