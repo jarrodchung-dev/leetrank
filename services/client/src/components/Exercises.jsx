@@ -23,16 +23,19 @@ class Exercises extends Component {
     this.prevExercise = this.prevExercise.bind(this);
     this.resetEditor = this.resetEditor.bind(this);
     this.renderButtons = this.renderButtons.bind(this);
+    this.getExercises = this.getExercises.bind(this);
   }
   componentDidMount() {
     this.getExercises();
   }
+
   handleChange(value) {
     const editor = this.state.editor;
     editor.value = value;
     this.setState(editor);
   }
   submitExercise(event, id) {}
+  getExercises() {}
   renderButtons() {}
   nextExercise() {}
   prevExercise() {}

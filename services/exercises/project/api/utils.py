@@ -66,6 +66,6 @@ def ensure_authenticated(token):
     if response.status_code == 200 and \
        data["status"] == "success" and \
        data["data"]["active"]:
-        return data
+       return data
     else:
         return False

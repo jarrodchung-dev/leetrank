@@ -7,6 +7,9 @@ from project import create_app
 from project import db
 from project.api.models import Exercise
 
+# This fixes testing import errors
+werkzeug.cached_property = werkzeug.utils.cached_property
+
 Cover = Coverage(
     branch=True,
     include="project/*",

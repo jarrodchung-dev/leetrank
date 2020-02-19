@@ -7,7 +7,7 @@ import "ace-builds/src-noconflict/theme-solarized_light";
 const Exercise = (props) => {
   return (
     <>
-      <div className="title is-5">{props.exercise.body}</div>
+      <span>{props.exercise.body}</span>
       <AceEditor
         mode="python"
         theme="github"
