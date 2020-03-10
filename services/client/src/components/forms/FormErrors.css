@@ -1,0 +1,26 @@
+li:before {
+  font-size: 12px;
+  float: left;
+  margin-top: 4px;
+  margin-left: -15px;
+}
+
+.error {
+  color: #ff3860;
+}
+
+.error:before {
+  content: "\00D7";
+  color: #ff3860;
+  margin-top: -1px;
+}
+
+.success {
+  color: #23d160;
+}
+
+.success:before {
+  content: "\2713";
+  color: #23d160;
+  margin-top: -1px;
+}

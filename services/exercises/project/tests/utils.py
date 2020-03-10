@@ -13,7 +13,7 @@ def add_exercise(
     exercise = Exercise(
         body=body,
         test_code=test_code,
-        test_solution=test_solution,
+        test_solution=test_solution
     )
     db.session.add(exercise)
     db.session.commit()

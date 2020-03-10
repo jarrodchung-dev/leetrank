@@ -18,7 +18,7 @@ exports[`<About /> renders a snapshot successfully 1`] = `
       <hr />
       <br />
       <p>
-        Add something relevant here.
+        Welcome to LeetRank!
       </p>
     </div>
   </div>

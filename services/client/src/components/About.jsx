@@ -8,7 +8,7 @@ const About = (props) => {
           <h3 className="title is-3">About</h3>
           <hr />
           <br />
-          <p>Add something relevant here.</p>
+          <p>Welcome to LeetRank!</p>
         </div>
       </div>
     </div>

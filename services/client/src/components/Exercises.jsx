@@ -9,7 +9,7 @@ class Exercises extends Component {
       currentExercise: 0,
       exercises: [],
       editor: {
-        value: "",
+        value: "# Enter your code here!",
         button: { isDisabled: false },
         showGrading: false,
         showCorrect: false,
@@ -36,12 +36,8 @@ class Exercises extends Component {
   }
   submitExercise(event, id) {
     event.preventDefault();
-    const data = { answer: this.state.editor.value };
-    const url = process.env.REACT_APP_API_GATEWAY_URL;
-    axios
-      .post(url, data)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    const editorValue = this.state.editor.value;
+    console.log(editorValue);
   }
   getExercises() {
     const exercises = [
@@ -85,13 +81,13 @@ class Exercises extends Component {
         )}
         <div className="field is-grouped">
           {this.state.showButtons.prev && (
-            <button className="button is-info" onClick={() => this.prevExercise()}>
+            <button className="button is-info" onClick={this.prevExercise}>
               &lt; Prev
             </button>
           )}
           &nbsp; &nbsp;
           {this.state.showButtons.next && (
-            <button className="button is-info" onClick={() => this.nextExercise()}>
+            <button className="button is-info" onClick={this.nextExercise}>
               Next &gt;
             </button>
           )}

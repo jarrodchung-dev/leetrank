@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
+
 import NavBar from "./components/NavBar.jsx";
 import Home from "./components/Home.jsx";
 import Message from "./components/Message.jsx";
 import Users from "./components/Users.jsx";
 import AddUser from "./components/AddUser.jsx";
-import AuthForm from "./components/AuthForm.jsx";
+import Form from "./components/forms/Form.jsx";
 import Exercises from "./components/Exercises.jsx";
 import Logout from "./components/Logout.jsx";
 import About from "./components/About.jsx";
@@ -58,7 +59,7 @@ class App extends Component {
     window.localStorage.clear();
     this.setState({ isAuthenticated: false });
   }
-  createMessage(text = "Great success!", type = "success") {
+  createMessage(text = "Welcome!", type = "success") {
     this.setState({ messageText: text, messageType: type });
   }
   render() {
@@ -92,7 +93,7 @@ class App extends Component {
                     exact
                     path="/register"
                     render={() => (
-                      <AuthForm
+                      <Form
                         type={"Register"}
                         loginUser={this.loginUser}
                         logoutUser={this.logouUser}
@@ -105,7 +106,7 @@ class App extends Component {
                     exact
                     path="/login"
                     render={() => (
-                      <AuthForm
+                      <Form
                         type={"Login"}
                         loginUser={this.loginUser}
                         logoutUser={this.logoutUser}
