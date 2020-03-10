@@ -3,15 +3,17 @@ from project.api.models import Exercise
 
 
 def add_exercise(
-        body=("Define a function called sum that takes two integers as "
-              "arguments and returns their sum"),
+        body=(
+            "Define a function called sum that takes two integers as \
+            arguments and returns their sum"
+        ),
         test_code="sum(2, 2)",
         test_solution="4"
     ):
     exercise = Exercise(
         body=body,
         test_code=test_code,
-        test_solution=test_solution,
+        test_solution=test_solution
     )
     db.session.add(exercise)
     db.session.commit()

@@ -1,7 +1,7 @@
 from project import db
 
 class Exercise(db.Model):
-    """ Exercise model for the Exercises service. """
+    """Exercise model for the Exercises service."""
 
     __tablename__ = "exercises"
 

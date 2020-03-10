@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NavBar = (props) => {
   const node = useRef();
@@ -51,6 +51,9 @@ const NavBar = (props) => {
               </Link>
               <Link to="/all-users" className="navbar-item">
                 Users
+              </Link>
+              <Link to="/exercises" className="navbar-item">
+                Exercises
               </Link>
               {props.isAuthenticated && (
                 <Link to="/user-status" className="navbar-item">

@@ -40,6 +40,7 @@ services:
     environment:
       - NODE_ENV=development
       - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+      - REACT_APP_API_GATEWAY_URL=${REACT_APP_API_GATEWAY_URL}
     depends_on:
       - users
 
@@ -68,7 +69,7 @@ services:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
       - USERS_SERVICE_URL=http://users:5000
-      - SECRET_KEY=my_precious
+      - SECRET_KEY=${SECRET_KEY}
       - DATABASE_URL=postgres://postgres:postgres@exercises-db:5432/exercises_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@exercises-db:5432/exercises_test
     depends_on:

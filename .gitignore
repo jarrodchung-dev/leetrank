@@ -10,3 +10,4 @@ workflow.sh
 notes.md
 scripts.sh
 deploy-local.sh
+kubernetes.md

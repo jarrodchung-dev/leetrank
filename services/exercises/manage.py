@@ -1,11 +1,15 @@
 import sys
 import unittest
+import werkzeug
 
 from coverage import Coverage
 from flask.cli import FlaskGroup
 from project import create_app
 from project import db
 from project.api.models import Exercise
+
+# This fixes testing import errors
+werkzeug.cached_property = werkzeug.utils.cached_property
 
 Cover = Coverage(
     branch=True,

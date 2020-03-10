@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exercise renders a snapshot properly when a user is authenticated 1`] = `
+Array [
+  <span
+    style={
+      Object {
+        "fontSize": "95%",
+      }
+    }
+  >
+    Define a function called sum that takes two arguments as arguments and returns their sum
+  </span>,
+  <div>
+    <button
+      className="button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Run Code
+    </button>
+    <br />
+    <br />
+    <div
+      className="level"
+    />
+  </div>,
+  <br />,
+]
+`;
+
+exports[`Exercise renders a snapshot properly when not authenticated 1`] = `
+Array [
+  <span
+    style={
+      Object {
+        "fontSize": "95%",
+      }
+    }
+  >
+    Define a function called sum that takes two arguments as arguments and returns their sum
+  </span>,
+  <br />,
+]
+`;

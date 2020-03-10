@@ -11,6 +11,9 @@ dev() {
   docker-compose exec users python manage.py recreate-db
   docker-compose exec users python manage.py test
   inspect $? users
+  docker-compose exec exercises python manage.py recreate-db  
+  docker-compose exec exercises python manage.py test
+  inspect $? exercises
   docker-compose exec client npm run coverage
   inspect $? client
   docker-compose down

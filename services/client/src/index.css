@@ -1,19 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Mono&display=swap");
+
 html {
 }
 
 body {
   min-width: 320px;
   direction: ltr;
-  font-family: FiraMono-Regular;
+  font-family: "Fira Mono", monospace;
   font-size: 13px;
   line-height: 1.25em;
   color: #000;
   letter-spacing: 0.01em;
-}
-
-section .section {
-  padding-top: 24px;
-  padding-bottom: 24px;
 }
 
 #brand {
@@ -42,8 +39,21 @@ button[type="submit"] {
   box-shadow: none;
 }
 
+button[class="button"] {
+  font-family: FiraMono-Regular;
+  box-sizing: border-box;
+  border-radius: 0;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  box-shadow: none;
+}
+
 button[type="submit"]:hover,
-button[type="submit"]:focus {
+button[type="submit"]:focus,
+button[class="button"]:hover,
+button[class="button"]:focus {
   color: white;
   outline: none;
   box-shadow: none;
@@ -91,4 +101,3 @@ div .message-body {
 div .notification {
   height: 25%;
 }
-
