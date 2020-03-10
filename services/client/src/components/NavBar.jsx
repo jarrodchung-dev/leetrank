@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NavBar = (props) => {
   const node = useRef();

@@ -39,8 +39,21 @@ button[type="submit"] {
   box-shadow: none;
 }
 
+button[class="button"] {
+  font-family: FiraMono-Regular;
+  box-sizing: border-box;
+  border-radius: 0;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  box-shadow: none;
+}
+
 button[type="submit"]:hover,
-button[type="submit"]:focus {
+button[type="submit"]:focus,
+button[class="button"]:hover,
+button[class="button"]:focus {
   color: white;
   outline: none;
   box-shadow: none;

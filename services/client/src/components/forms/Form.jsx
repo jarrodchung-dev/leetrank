@@ -15,7 +15,7 @@ class Form extends Component {
       },
       registerFormRules: registerFormRules,
       loginFormRules: loginFormRules,
-      valid: false
+      disabled: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,7 +27,12 @@ class Form extends Component {
     this.clearForm();
     this.validateForm();
   }
-  componentDidUpdate() {}
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.type !== prevProps.type) {
+      this.clearForm();
+      this.validateForm();
+    }
+  }
   clearForm() {
     this.setState({
       formData: {
@@ -79,14 +84,18 @@ class Form extends Component {
       if (this.validateEmail(formData.email)) rules[2].valid = true;
       if (formData.password.length > 10) rules[3].valid = true;
       this.setState({ registerFormRules: rules });
-      if (this.allValid()) this.setState({ valid: true });
+      if (this.allValid()) {
+        this.setState({ disabled: true });
+      }
     }
     if (this.props.type === "Login") {
       const rules = this.state.loginFormRules;
       if (formData.email.length > 0) rules[0].valid = true;
       if (formData.password.length > 0) rules[1].valid = true;
       this.setState({ loginFormRules: rules });
-      if (this.allValid()) this.setState({ valid: true });
+      if (this.allValid()) {
+        this.setState({ disabled: true });
+      }
     }
   }
   allValid() {

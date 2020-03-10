@@ -2,12 +2,12 @@ import React from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/theme-solarized_light";
+import "ace-builds/src-noconflict/theme-github";
 
 const Exercise = (props) => {
   return (
     <>
-      <span>{props.exercise.body}</span>
+      <span style={{ fontSize: "95%" }}>{props.exercise.body}</span>
       <AceEditor
         mode="python"
         theme="github"
@@ -25,38 +25,34 @@ const Exercise = (props) => {
       {props.isAuthenticated && (
         <div>
           <button
-            className="button is-primary"
+            className="button"
             onClick={(event) => props.submitExercise(event, props.exercise.id)}
             disabled={props.editor.button.isDisabled}
           >
             Run Code
           </button>
-          {props.editor.showGrading && (
-            <h5 className="title is-5">
-              <span className="icon is-large">
-                <i className="fas fa-spinner fa-pulse"></i>
-              </span>
-              <span className="grade-text">Grading...</span>
-            </h5>
-          )}
-          {props.editor.showCorrect && (
-            <h5 className="title is-5">
-              <span className="icon is-large">
-                <i className="fas fa-check"></i>
-              </span>
-              <span className="grade-text">Correct!</span>
-            </h5>
-          )}
-          {props.editor.showIncorrect && (
-            <h5 className="title is-5">
-              <span className="icon is-large">
-                <i className="fas fa-times"></i>
-              </span>
-              <span className="grade-text">Incorrect!</span>
-            </h5>
-          )}
+          <br />
+          <br />
+          <div className="level">
+            {props.editor.showGrading && (
+              <h5 className="has-text-left">
+                <span className="grade-text">Grading...</span>
+              </h5>
+            )}
+            {props.editor.showCorrect && (
+              <h5 className="has-text-left">
+                <span className="grade-text">Correct!</span>
+              </h5>
+            )}
+            {props.editor.showIncorrect && (
+              <h5 className="has-text-left">
+                <span className="grade-text">Incorrect!</span>
+              </h5>
+            )}
+          </div>
         </div>
       )}
+
       <br />
     </>
   );

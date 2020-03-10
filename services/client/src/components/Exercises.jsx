@@ -28,38 +28,105 @@ class Exercises extends Component {
   componentDidMount() {
     this.getExercises();
   }
-
   handleChange(value) {
     const editor = this.state.editor;
     editor.value = value;
     this.setState(editor);
   }
+  getExercises() {
+    return axios
+      .get(`/exercises`)
+      .then((res) => {
+        let exercises = res.data.data.exercises;
+        this.setState({ exercises }, () => {
+          this.setState({ currentExercise: 0 });
+        });
+        this.renderButtons();
+      })
+      .catch((err) => {});
+  }
   submitExercise(event, id) {
     event.preventDefault();
-    const editorValue = this.state.editor.value;
-    console.log(editorValue);
+    const editor = this.state.editor;
+    const exercise = this.state.exercises.filter((el) => el.id === id)[0];
+    editor.showGrading = true;
+    editor.showCorrect = false;
+    editor.showIncorrect = false;
+    editor.button.isDisabled = true;
+    this.setState(editor);
+    const code = {
+      answer: this.state.editor.value,
+      test: exercise.test_code,
+      solution: exercise.test_solution
+    };
+    console.log(code);
+    axios
+      .post(process.env.REACT_APP_API_GATEWAY_URL, code)
+      .then((res) => {
+        editor.showGrading = false;
+        editor.button.isDisabled = false;
+        if (res.data && !res.data.errorType) {
+          editor.showCorrect = true;
+        }
+        if (!res.data || res.data.errorType) {
+          editor.showIncorrect = true;
+        }
+        this.setState(editor);
+      })
+      .catch((err) => {
+        editor.showGrading = false;
+        editor.button.isDisabled = false;
+        console.log(err);
+      });
   }
-  getExercises() {
-    const exercises = [
-      {
-        id: 0,
-        body: "Define a function called sum..."
-      },
-      {
-        id: 1,
-        body: "Define a function called reverse..."
-      },
-      {
-        id: 2,
-        body: "Define a function called factorial..."
+
+  renderButtons() {
+    const currentExercise = this.state.currentExercise;
+    let nextButton = false;
+    let prevButton = false;
+    if (typeof this.state.exercises[currentExercise + 1] !== "undefined") {
+      nextButton = true;
+    }
+    if (typeof this.state.exercises[currentExercise - 1] !== "undefined") {
+      prevButton = true;
+    }
+    this.setState({
+      showButtons: {
+        next: nextButton,
+        prev: prevButton
       }
-    ];
-    return this.setState({ exercises });
+    });
   }
-  renderButtons() {}
-  nextExercise() {}
-  prevExercise() {}
-  resetEditor() {}
+  nextExercise() {
+    if (this.state.showButtons.next) {
+      const currentExercise = this.state.currentExercise;
+      this.setState({ currentExercise: currentExercise + 1 }, () => {
+        this.resetEditor();
+        this.renderButtons();
+      });
+    }
+  }
+  prevExercise() {
+    if (this.state.showButtons.prev) {
+      const currentExercise = this.state.currentExercise;
+      this.setState({ currentExercise: currentExercise - 1 }, () => {
+        this.resetEditor();
+        this.renderButtons();
+      });
+    }
+  }
+  resetEditor() {
+    const editor = {
+      value: "# Enter your code here!",
+      button: {
+        isDisabled: false
+      },
+      showGrading: false,
+      showCorrect: false,
+      showIncorrect: false
+    };
+    this.setState({ editor });
+  }
   render() {
     return (
       <div>
@@ -75,22 +142,29 @@ class Exercises extends Component {
             exercise={this.state.exercises[this.state.currentExercise]}
             editor={this.state.editor}
             isAuthenticated={this.props.isAuthenticated}
-            onChange={this.handleChange}
+            handleChange={this.handleChange}
             submitExercise={this.submitExercise}
           />
         )}
-        <div className="field is-grouped">
-          {this.state.showButtons.prev && (
-            <button className="button is-info" onClick={this.prevExercise}>
-              &lt; Prev
-            </button>
-          )}
-          &nbsp; &nbsp;
-          {this.state.showButtons.next && (
-            <button className="button is-info" onClick={this.nextExercise}>
-              Next &gt;
-            </button>
-          )}
+        <div className="level">
+          <div className="level-left">
+            <div className="level-item">
+              {this.state.showButtons.prev && (
+                <button className="button" onClick={this.prevExercise}>
+                  &lt; Prev
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="level-right">
+            <div className="level-item">
+              {this.state.showButtons.next && (
+                <button className="button" onClick={this.nextExercise}>
+                  Next &gt;
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     );
