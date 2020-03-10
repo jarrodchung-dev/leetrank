@@ -55,6 +55,14 @@ then
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_task_definition
+
+      service="leetrank-exercises-prod-service"
+      template="ecs_exercises_prod_taskdefinition.json"
+      task_template=$(cat "ecs/$template")
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_RDS_EXERCISES_URI)
+      echo "$task_def"
+      register_definition
+      update_service
     }
 
     configure_aws_cli

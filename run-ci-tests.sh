@@ -22,7 +22,9 @@ dev() {
 e2e() {
   docker-compose -f docker-compose-stage.yml up -d --build
   docker-compose -f docker-compose-stage.yml exec users python manage.py recreate-db
-  ./node_modules/.bin/cypress run --config baseUrl="http://localhost"
+  ./node_modules/.bin/cypress run \
+    --config baseUrl="http://localhost" \
+    --env REACT_APP_EXERCISES_SERVICE_URL=$REACT_APP_EXERCISES_SERVICE_URL 
   inspect $?  e2e
   docker-compose -f docker-compose-stage.yml down
 }
