@@ -2,6 +2,12 @@
 
 exports[`<Users /> renders a snapshot successfully 1`] = `
 Array [
+  <h3
+    className="title is-3 has-text-centered"
+  >
+    Active Users
+  </h3>,
+  <br />,
   <div
     className="level"
   >

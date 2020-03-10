@@ -16,9 +16,22 @@ exports[`<Exercises /> renders a snapshot successfully 1`] = `
     </span>
   </div>
   <div
-    className="field is-grouped"
+    className="level"
   >
-       
+    <div
+      className="level-left"
+    >
+      <div
+        className="level-item"
+      />
+    </div>
+    <div
+      className="level-right"
+    >
+      <div
+        className="level-item"
+      />
+    </div>
   </div>
 </div>
 `;
