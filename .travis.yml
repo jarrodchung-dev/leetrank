@@ -39,5 +39,5 @@ script:
 
 after_success:
   - bash ./docker-ecr-push.sh
-  - bash ./docker-staging-deploy.sh
-  - bash ./docker-production-deploy.sh
+  - bash ./docker-deploy-stage.sh
+  - bash ./docker-deploy-prod.sh

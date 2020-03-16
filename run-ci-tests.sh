@@ -26,7 +26,7 @@ e2e() {
     --config baseUrl="http://localhost" \
     --env REACT_APP_EXERCISES_SERVICE_URL=$REACT_APP_EXERCISES_SERVICE_URL 
   inspect $?  e2e
-  docker-compose -f docker-compose-stage.yml down
+  docker-compose -f docker-compose-$1.yml down
 }
 
 if [[ "${env}" == "development" ]]; then
