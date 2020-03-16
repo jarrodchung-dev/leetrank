@@ -63,7 +63,6 @@ then
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_task_definition
-      update_service
     }
     
     configure_aws_cli
